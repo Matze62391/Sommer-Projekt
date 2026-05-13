@@ -1,13 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zahlenraten</title>
-    <link rel="stylesheet" href="zahlenraten.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zahlenraten</title>
+  <link rel="stylesheet" href="zahlenraten.css">
 </head>
 <body>
-    
-    <script src="zahlenraten.js"></script>
+  <div class="container">
+    <h1>Zahlenraten</h1>
+    <p>...von 1 bis 100</p>
+
+    <input type="number" id="guess" placeholder="Deine Vermutung" min="1" max="100">
+    <button id="check_button">Prüfen</button>
+    <button id="restart_button">Neu starten</button>
+    <p>Versuche: <span id="versuche">0</span></p>
+    <p id="message">Viel Glück!</p>
+  </div>
+
+  <script src="zahlenraten.js"></script>
 </body>
 </html>
