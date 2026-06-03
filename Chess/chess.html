@@ -1,34 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chess</title>
-  <link rel="stylesheet" href="chess.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Schach</title>
+  <link rel="stylesheet" href="css/chess.css" />
 </head>
 <body>
-  <!-- UI controls -->
-  <div id="controls" style="margin-bottom:10px;">
-    <label>
-      <input type="radio" name="mode" value="hvh" checked> Human vs Human
-    </label>
-    <label style="margin-left:15px;">
-      <input type="radio" name="mode" value="hvai"> Human vs AI
-    </label>
-    <button id="newGameBtn" style="margin-left:15px;">New Game</button>
+
+  <!-- Haupt-Container -->
+  <div id="app">
+
+    <!-- Spielinfo (Spieler, Timer, etc.) -->
+    <div id="info-panel">
+      <span id="current-player">Am Zug: Weiß</span>
+    </div>
+
+    <!-- Das Schachbrett -->
+    <div id="board">
+      <!-- 64 Felder werden per board.js dynamisch erzeugt -->
+    </div>
+
+    <!-- Geschlagene Figuren -->
+    <div id="captured-pieces">
+      <div id="captured-white"></div>
+      <div id="captured-black"></div>
+    </div>
+
   </div>
 
-  <!-- Board placeholder -->
-  <div id="board" style="width:400px; height:400px;margin:auto;"></div>
+  <!-- JS-Dateien in der richtigen Reihenfolge laden -->
+  <script src="js/pieces.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/game.js"></script>
 
-  <!-- Status line -->
-  <div id="status" style="text-align:center;margin-top:10px;font-weight:bold;"></div>
-
-  <!-- Load libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/chess.js@1.0.0/dist/chess.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/js/chessboard-standalone.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/stockfish@latest/stockfish.js"></script>
-   <!-- Your game logic -->
-  <script src="chess.js"></script>
 </body>
 </html>

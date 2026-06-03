@@ -1,0 +1,78 @@
+/* =====================
+   CSS-Variablen (Farben)
+   ===================== */
+:root {
+  --light-square: #f0d9b5;
+  --dark-square:  #b58863;
+  --highlight:    rgba(20, 180, 20, 0.5);
+  --selected:     rgba(20, 20, 180, 0.5);
+}
+
+/* =====================
+   Grundlayout
+   ===================== */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background: #1a1a2e;
+  font-family: sans-serif;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* =====================
+   Das Brett
+   ===================== */
+#board {
+  display: grid;
+  grid-template-columns: repeat(8, 80px);
+  grid-template-rows:    repeat(8, 80px);
+  border: 3px solid #333;
+}
+
+/* =====================
+   Einzelne Felder
+   ===================== */
+.square {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 48px;
+  cursor: pointer;
+}
+
+.square.light { background: var(--light-square); }
+.square.dark  { background: var(--dark-square);  }
+
+/* Zustände */
+.square.selected   { background: var(--selected);   }
+.square.highlight  { background: var(--highlight);  }
+
+/* =====================
+   Info-Panel
+   ===================== */
+#info-panel {
+  color: white;
+  font-size: 1.2rem;
+}
+
+/* =====================
+   Geschlagene Figuren
+   ===================== */
+#captured-pieces {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: white;
+  font-size: 1.5rem;
+}
