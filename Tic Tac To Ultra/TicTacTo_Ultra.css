@@ -1,0 +1,95 @@
+:root {
+    --bg: #111;
+    --text: #fff;
+    --big-bg: #333;
+    --cell-bg: #222;
+    --cell-hover: #444;
+    --border: #666;
+    --x-color: rgba(255, 80, 80, 0.9);
+    --o-color: rgba(80, 160, 255, 0.9);
+}
+
+.light {
+    --bg: #f2f2f2;
+    --text: #000;
+    --big-bg: #fff;
+    --cell-bg: #e6e6e6;
+    --cell-hover: #d4d4d4;
+    --border: #999;
+    --x-color: rgba(255, 50, 50, 0.9);
+    --o-color: rgba(50, 120, 255, 0.9);
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.container {
+    margin-top: 30px;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    width: 600px;
+    margin: 0 auto;
+}
+
+.big-cell {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: var(--big-bg);
+    padding: 6px;
+    gap: 6px;
+    border: 3px solid var(--border);
+    position: relative;
+}
+
+.cell {
+    width: 60px;
+    height: 60px;
+    background: var(--cell-bg);
+    border: 2px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: var(--text);
+    transition: 0.2s;
+}
+
+.cell:hover {
+    background: var(--cell-hover);
+}
+
+.big-cell.winX::after {
+    content: "X";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 120px;
+    color: var(--x-color);
+}
+
+.big-cell.winO::after {
+    content: "O";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 120px;
+    color: var(--o-color);
+}
+
+#reset-button, #theme-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
