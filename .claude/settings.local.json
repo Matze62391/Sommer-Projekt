@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "WebFetch(domain:cdnjs.cloudflare.com)",
-      "Bash(curl -s -o /tmp/chess2.js https://cdn.jsdelivr.net/npm/chess.js@1.0.0/dist/chess.js)"
-    ]
-  }
-}
