@@ -5,7 +5,7 @@ const vermutung = document.getElementById("guess");
 const check_button = document.getElementById("check_button");
 const restart_button = document.getElementById("restart_button");
 const message = document.getElementById("message");
-const triesDisplay = document.getElementById("versuche");
+const tries = document.getElementById("versuche");
 
 check_button.addEventListener("click", () => {
   const guess = Number(vermutung.value);
@@ -16,7 +16,7 @@ check_button.addEventListener("click", () => {
   }
 
   versuche++;
-  triesDisplay.textContent = versuche;
+  tries.textContent = versuche;
 
   if (guess === Nummer) {
     message.textContent = `Richtig! Du hast die Zahl in ${versuche} Versuchen erraten.`;
@@ -30,7 +30,7 @@ check_button.addEventListener("click", () => {
 restart_button.addEventListener("click", () => {
   Nummer = Math.floor(Math.random() * 100) + 1;
   versuche = 0;
-  triesDisplay.textContent = versuche;
+  tries.textContent = versuche;
   message.textContent = "Neues Spiel gestartet!";
   vermutung.value = "";
 });
