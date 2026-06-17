@@ -1,151 +1,89 @@
 /* Classic */
 
+// Spieler-Symbole festlegen
 let player1 = "X";
 let player2 = "O";
 
+// Startspieler setzen
 let aktueller_player = player1;
+
+// Alle HTML-Felder des Spielfelds holen
 let felder_clasic = document.querySelectorAll(".cell_c");
 
+// Array für den Spielstatus (welches Feld ist belegt)
 let felder = ["","","","","","","","",""];
 
+// Gewinnkombinationen (Index-Positionen im Array)
 const win = [
-    [0,1,2],[3,4,5],[6,7,8],
-    [0,3,6],[1,4,7],[2,5,8],
-    [0,4,8],[2,4,6]
+    [0,1,2],[3,4,5],[6,7,8],      // Reihen
+    [0,3,6],[1,4,7],[2,5,8],      // Spalten
+    [0,4,8],[2,4,6]               // Diagonalen
 ];
 
+// Klick-Event für jedes Feld setzen
 felder_clasic.forEach((feld, index) => {
     feld.addEventListener("click", () => {
-        feldKlick(index);
+        feldKlick(index);         // Funktion mit Feld-Index aufrufen
     });
 });
 
 function feldKlick(index) {
+
+    // Wenn Feld schon belegt ist → nichts machen
     if (felder[index] !== "") return;
 
+    // Spielerzeichen ins Array eintragen
     felder[index] = aktueller_player;
+
+    // Zeichen auch im HTML anzeigen
     felder_clasic[index].textContent = aktueller_player;
 
+    // Prüfen ob jemand gewonnen hat
     let winner = check_win(felder);
 
+    // Wenn Gewinner gefunden → Meldung anzeigen
     if (winner !== null) {
         alert(winner + " hat gewonnen!");
-        return;
+        return;                   // Spiel stoppen
     }
 
+    // Spieler wechseln (X → O oder O → X)
     aktueller_player = aktueller_player === "X" ? "O" : "X";
 }
 
 function check_win(felder) {
+
+    // Jede Gewinnkombination durchgehen
     for (let combo of win) {
+
+        // Einzelne Positionen der Kombination holen
         let a = combo[0];
         let b = combo[1];
         let c = combo[2];
 
+        // Prüfen ob alle drei Felder gleich sind und nicht leer
         if (
             felder[a] !== "" &&
             felder[a] === felder[b] &&
             felder[b] === felder[c]
         ) {
-            return felder[a];
+            return felder[a];     // Gewinner zurückgeben
         }
     }
+
+    // Kein Gewinner gefunden
     return null;
 }
 
-/* Reset Classic */
-
+// Reset-Button setzt das Spiel zurück
 document.getElementById("reset-button").addEventListener("click", () => {
+
+    // Spielfeld-Array leeren
     felder = ["","","","","","","","",""];
+
+    // HTML-Felder leeren
     felder_clasic.forEach(f => f.textContent = "");
+
+    // Spieler wieder auf X setzen
     aktueller_player = player1;
-});
-
-/* Toggle Classic / Ultra */
-
-const toggle = document.getElementById("mode-toggle");
-const modeText = document.getElementById("mode-text");
-
-const ultraGame = document.querySelector(".game-board");
-const classicGame = document.querySelector(".classic");
-
-toggle.checked = false;
-ultraGame.style.display = "none";
-classicGame.style.display = "grid";
-modeText.textContent = "Classic";
-
-toggle.addEventListener("change", () => {
-    if (toggle.checked) {
-        ultraGame.style.display = "grid";
-        classicGame.style.display = "none";
-        modeText.textContent = "Ultra";
-    } else {
-        ultraGame.style.display = "none";
-        classicGame.style.display = "grid";
-        modeText.textContent = "Classic";
-    }
-});
-
-/* Ultra */
-
-let p1 = "X";
-let p2 = "O";
-
-let cur = p1;
-let next = null;
-
-let small = Array(9).fill(null).map(() => Array(9).fill(""));
-let big = Array(9).fill("");
-
-let winp = [
-    [0,1,2],[3,4,5],[6,7,8],
-    [0,3,6],[1,4,7],[2,5,8],
-    [0,4,8],[2,4,6]
-];
-
-function w(b) {
-    for (let c of winp) {
-        let a = c[0], d = c[1], e = c[2];
-        if (b[a] && b[a] === b[d] && b[d] === b[e]) return b[a];
-    }
-    return "";
-}
-
-function clickU(e) {
-    let id = e.target.id;
-    if (!id.startsWith("small")) return;
-
-    let p = id.split("-");
-    let s = parseInt(p[1]);
-    let b = parseInt(p[2]);
-
-    if (next !== null && next !== b) return;
-    if (small[b][s] !== "") return;
-    if (big[b] !== "") return;
-
-    small[b][s] = cur;
-    e.target.textContent = cur;
-
-    let ws = w(small[b]);
-    if (ws) {
-        big[b] = ws;
-        let bb = document.getElementById("big-" + b);
-        bb.classList.add(ws === "X" ? "winX" : "winO");
-        bb.setAttribute("data-win", ws);
-    }
-
-    let wb = w(big);
-    if (wb) {
-        alert(cur + " gewinnt");
-        return;
-    }
-
-    next = s;
-    if (big[next] !== "") next = null;
-
-    cur = cur === "X" ? "O" : "X";
-}
-
-document.querySelectorAll(".cell").forEach(c => {
-    c.addEventListener("click", clickU);
 });
