@@ -4,6 +4,7 @@ const ctx = canvas.getContext("2d");
 const paddleHeight = 60;
 const paddleWidth = 10;
 const speed = 4;
+const gay = 100;
 
 // --- Spieler 1 (links, Pfeiltasten) ---
 let y1 = 120;
@@ -88,10 +89,10 @@ function play() {
   // Zeichnen
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Paddle Spieler 1 (links)
+  // Paddle Spieler 1 
   ctx.fillRect(10, y1, paddleWidth, paddleHeight);
 
-  // Paddle Spieler 2 (rechts)
+  // Paddle Spieler 2 
   ctx.fillRect(canvas.width - 20, y2, paddleWidth, paddleHeight);
 
   // Ball
