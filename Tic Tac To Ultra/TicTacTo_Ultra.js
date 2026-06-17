@@ -1,72 +1,151 @@
-let currentPlayer = "X";
-let nextBig = null;
+/* Classic */
 
-const smallBoards = Array(9).fill(null).map(() => Array(9).fill(""));
-const bigBoard = Array(9).fill("");
+let player1 = "X";
+let player2 = "O";
 
-const winPatterns = [
+let aktueller_player = player1;
+let felder_clasic = document.querySelectorAll(".cell_c");
+
+let felder = ["","","","","","","","",""];
+
+const win = [
     [0,1,2],[3,4,5],[6,7,8],
     [0,3,6],[1,4,7],[2,5,8],
     [0,4,8],[2,4,6]
 ];
 
-function checkWin(board) {
-    for (let p of winPatterns) {
-        const [a,b,c] = p;
-        if (board[a] && board[a] === board[b] && board[b] === board[c]) return board[a];
+felder_clasic.forEach((feld, index) => {
+    feld.addEventListener("click", () => {
+        feldKlick(index);
+    });
+});
+
+function feldKlick(index) {
+    if (felder[index] !== "") return;
+
+    felder[index] = aktueller_player;
+    felder_clasic[index].textContent = aktueller_player;
+
+    let winner = check_win(felder);
+
+    if (winner !== null) {
+        alert(winner + " hat gewonnen!");
+        return;
+    }
+
+    aktueller_player = aktueller_player === "X" ? "O" : "X";
+}
+
+function check_win(felder) {
+    for (let combo of win) {
+        let a = combo[0];
+        let b = combo[1];
+        let c = combo[2];
+
+        if (
+            felder[a] !== "" &&
+            felder[a] === felder[b] &&
+            felder[b] === felder[c]
+        ) {
+            return felder[a];
+        }
+    }
+    return null;
+}
+
+/* Reset Classic */
+
+document.getElementById("reset-button").addEventListener("click", () => {
+    felder = ["","","","","","","","",""];
+    felder_clasic.forEach(f => f.textContent = "");
+    aktueller_player = player1;
+});
+
+/* Toggle Classic / Ultra */
+
+const toggle = document.getElementById("mode-toggle");
+const modeText = document.getElementById("mode-text");
+
+const ultraGame = document.querySelector(".game-board");
+const classicGame = document.querySelector(".classic");
+
+toggle.checked = false;
+ultraGame.style.display = "none";
+classicGame.style.display = "grid";
+modeText.textContent = "Classic";
+
+toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+        ultraGame.style.display = "grid";
+        classicGame.style.display = "none";
+        modeText.textContent = "Ultra";
+    } else {
+        ultraGame.style.display = "none";
+        classicGame.style.display = "grid";
+        modeText.textContent = "Classic";
+    }
+});
+
+/* Ultra */
+
+let p1 = "X";
+let p2 = "O";
+
+let cur = p1;
+let next = null;
+
+let small = Array(9).fill(null).map(() => Array(9).fill(""));
+let big = Array(9).fill("");
+
+let winp = [
+    [0,1,2],[3,4,5],[6,7,8],
+    [0,3,6],[1,4,7],[2,5,8],
+    [0,4,8],[2,4,6]
+];
+
+function w(b) {
+    for (let c of winp) {
+        let a = c[0], d = c[1], e = c[2];
+        if (b[a] && b[a] === b[d] && b[d] === b[e]) return b[a];
     }
     return "";
 }
 
-function handleClick(e) {
-    const id = e.target.id;
+function clickU(e) {
+    let id = e.target.id;
     if (!id.startsWith("small")) return;
 
-    const [_, s, b] = id.split("-").join(".").split(".");
-    const bigIndex = parseInt(b);
-    const smallIndex = parseInt(s);
+    let p = id.split("-");
+    let s = parseInt(p[1]);
+    let b = parseInt(p[2]);
 
-    if (nextBig !== null && nextBig !== bigIndex) return;
-    if (smallBoards[bigIndex][smallIndex] !== "") return;
-    if (bigBoard[bigIndex] !== "") return;
+    if (next !== null && next !== b) return;
+    if (small[b][s] !== "") return;
+    if (big[b] !== "") return;
 
-    smallBoards[bigIndex][smallIndex] = currentPlayer;
-    e.target.textContent = currentPlayer;
+    small[b][s] = cur;
+    e.target.textContent = cur;
 
-    const wSmall = checkWin(smallBoards[bigIndex]);
-    if (wSmall) {
-        bigBoard[bigIndex] = wSmall;
-        const big = document.getElementById("big-" + bigIndex);
-        big.classList.add(wSmall === "X" ? "winX" : "winO");
+    let ws = w(small[b]);
+    if (ws) {
+        big[b] = ws;
+        let bb = document.getElementById("big-" + b);
+        bb.classList.add(ws === "X" ? "winX" : "winO");
+        bb.setAttribute("data-win", ws);
     }
 
-    const wBig = checkWin(bigBoard);
-    if (wBig) {
-        alert(currentPlayer + " gewinnt");
+    let wb = w(big);
+    if (wb) {
+        alert(cur + " gewinnt");
         return;
     }
 
-    nextBig = smallIndex;
-    if (bigBoard[nextBig] !== "") nextBig = null;
+    next = s;
+    if (big[next] !== "") next = null;
 
-    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    cur = cur === "X" ? "O" : "X";
 }
 
-document.querySelectorAll(".cell").forEach(c => c.addEventListener("click", handleClick));
-
-document.getElementById("reset-button").addEventListener("click", () => {
-    location.reload();
-});
-
-const themeButton = document.getElementById("theme-button");
-
-if (localStorage.getItem("theme") === "light") {
-    document.body.classList.add("light");
-}
-
-themeButton.addEventListener("click", () => {
-    document.body.classList.toggle("light");
-    localStorage.setItem("theme",
-        document.body.classList.contains("light") ? "light" : "dark"
-    );
+document.querySelectorAll(".cell").forEach(c => {
+    c.addEventListener("click", clickU);
 });
