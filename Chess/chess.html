@@ -1,56 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="light">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chess</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/chess.css">
-  
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chess</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/chess.css" />
+  </head>
+  <body>
+    <header class="site-header" role="banner">
+      <button
+        class="theme-toggle"
+        data-theme-toggle
+        aria-label="Switch to dark mode"
+        title="Toggle dark mode"
+      >
+        <svg
+          id="theme-icon"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="5" />
+          <path
+            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+          />
+        </svg>
+      </button>
+    </header>
 
-  <header class="site-header" role="banner">
-    <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode" title="Toggle dark mode">
-      <svg id="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="5"/>
-        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-      </svg>
-    </button>
-  </header>
-
-  <main class="main-content">
-    <div class="board-wrapper">
-      <div class="chess-board-outer">
-        <div style="width:24px"></div>
-        <div style="display:flex; flex-direction:column; gap: var(--space-1);">
-          <div class="file-labels" aria-hidden="true">
-            <span>a</span><span>b</span><span>c</span><span>d</span>
-            <span>e</span><span>f</span><span>g</span><span>h</span>
-          </div>
-          <div style="display:flex; align-items:center; gap: var(--space-1);">
-            <div class="rank-labels" aria-hidden="true">
-              <span>8</span><span>7</span><span>6</span><span>5</span>
-              <span>4</span><span>3</span><span>2</span><span>1</span>
+    <main class="main-content">
+      <div class="board-wrapper">
+        <div class="chess-board-outer">
+          <div style="width: 24px"></div>
+          <div
+            style="display: flex; flex-direction: column; gap: x var(--space-1)"
+          >
+            <div class="file-labels" aria-hidden="true">
+              <span>a</span><span>b</span><span>c</span><span>d</span>
+              <span>e</span><span>f</span><span>g</span><span>h</span>
             </div>
-            <div class="chess-board" id="chessBoard" role="grid" aria-label="Chess board"></div>
-          </div>
-          <div class="file-labels" aria-hidden="true">
-            <span>a</span><span>b</span><span>c</span><span>d</span>
-            <span>e</span><span>f</span><span>g</span><span>h</span>
+            <div
+              style="display: flex; align-items: center; gap: var(--space-1)"
+            >
+              <div class="rank-labels" aria-hidden="true">
+                <span>8</span><span>7</span><span>6</span><span>5</span>
+                <span>4</span><span>3</span><span>2</span><span>1</span>
+              </div>
+              <div
+                class="chess-board"
+                id="chessBoard"
+                role="grid"
+                aria-label="Chess board"
+              ></div>
+            </div>
+            <div class="file-labels" aria-hidden="true">
+              <span>a</span><span>b</span><span>c</span><span>d</span>
+              <span>e</span><span>f</span><span>g</span><span>h</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </main>
+    </main>
 
-  <footer class="site-footer">
-    <p>Chess &mdash; Two Player &bull; vs AI &bull; Rules</p>
-  </footer>
+    <footer class="site-footer">
+      <p>Chess &mdash; Two Player &bull; vs AI &bull; Rules</p>
+    </footer>
 
-  <script src="js/board.js"></script>
-</body>
+    <script src="js/board.js"></script>
+  </body>
 </html>
