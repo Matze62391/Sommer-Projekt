@@ -3,8 +3,7 @@ const ctx = canvas.getContext("2d");
 
 const paddleHeight = 60;
 const paddleWidth = 10;
-const speed = 4;
-const gay = 100;
+const speed = 3;
 
 // --- Spieler 1 (links, Pfeiltasten) ---
 let y1 = 120;
@@ -41,6 +40,7 @@ let score1 = 0;
 let score2 = 0;
 
 function play() {
+
   // Spieler 1 bewegen
   if (upPressed) y1 -= speed;
   if (downPressed) y1 += speed;
@@ -104,6 +104,7 @@ function play() {
   ctx.fillText(score2, 220, 30);
 
   requestAnimationFrame(play);
+
 }
 
 play();
